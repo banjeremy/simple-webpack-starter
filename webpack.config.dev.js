@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const publicPath = "public";
 
@@ -16,5 +17,8 @@ module.exports = {
     stats: 'minimal',
     contentBase: publicPath
   },
-  devtool: 'cheap-eval-source-map'
+  devtool: 'cheap-eval-source-map',
+  plugins: [
+    new HtmlWebpackPlugin({template: './public/index.html'})
+  ]
 }
