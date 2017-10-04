@@ -1,4 +1,6 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -12,21 +14,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader'
-        }]
+        use: ExtractTextPlugin.extract(['css-loader']),
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader'
-        }, {
-          loader: 'sass-loader'
-        }]
+        use: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
       },
       {
         test: /\.jsx?$/,
@@ -40,20 +32,16 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    contentBase: [
-      path.join(__dirname, 'dist'),
-      path.join(__dirname, 'public')
-    ],
-    port: 9000
-  },
   plugins: [
+    // new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html',
       inject: 'body'
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
+    new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([{ from: 'public' }]),
   ]
 };
