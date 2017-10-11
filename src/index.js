@@ -1,4 +1,8 @@
-import greeting from './greeting';
 import './style.scss';
+import 'whatwg-fetch';
 
-greeting();
+fetch('/api/hitCount', response => {
+  response.json();
+}).then(payload => {
+  document.write(`<h1>hit count: ${payload.hitCount}</h1>`);
+});
