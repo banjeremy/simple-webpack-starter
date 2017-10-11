@@ -43,7 +43,9 @@ module.exports = {
       path.join(__dirname, 'public')
     ],
     port: 8080,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    public: true,
+    disableHostCheck: true
   },
   plugins: [
     new HtmlWebpackPlugin({
