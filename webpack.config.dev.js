@@ -42,7 +42,7 @@ module.exports = {
       path.join(__dirname, 'dist'),
       path.join(__dirname, 'public')
     ],
-    port: 9000
+    port: 8080
   },
   plugins: [
     new HtmlWebpackPlugin({
