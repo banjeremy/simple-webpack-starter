@@ -9,7 +9,7 @@ if [ $rc -eq 0 ]; then # assemble was successful
     npm run build
 
     echo "Archiving build..."
-    tar -C dist -cvzf dist.tar.gz .
+    tar -cvzf dist.tar.gz -C dist . -C ../ nginx-cfg
 fi
 
 exit $rc
