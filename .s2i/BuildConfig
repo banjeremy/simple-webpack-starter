@@ -1,0 +1,11 @@
+strategy:
+  type: "Source"
+  sourceStrategy:
+    from:
+      kind: "ImageStreamTag"
+      name: "centos/nodejs-6-centos7"
+    runtimeImage:
+      kind: "ImageStreamTag"
+      name: "centos/nginx-18-centos7"
+    runtimeArtifacts:
+      - sourcePath: "/opt/app-root/src/dist.tar.gz"
