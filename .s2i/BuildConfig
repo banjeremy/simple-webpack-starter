@@ -1,11 +1,29 @@
-strategy:
-  type: "Source"
-  sourceStrategy:
-    from:
-      kind: "ImageStreamTag"
-      name: "centos/nodejs-6-centos7"
-    runtimeImage:
-      kind: "ImageStreamTag"
-      name: "centos/nginx-18-centos7"
-    runtimeArtifacts:
-      - sourcePath: "/opt/app-root/src/dist.tar.gz"
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: simple-webpack-starter
+  namespace: hello-openshift
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'simple-webpack-starter:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: 'https://github.com/banjeremy/simple-webpack-starter#nginx_build'
+    type: Git
+  strategy:
+    type: "Source"
+    sourceStrategy:
+      from:
+        kind: "DockerImage"
+        name: "centos/nodejs-6-centos7"
+      runtimeImage:
+        kind: "DockerImage"
+        name: "centos/nginx-18-centos7"
+      runtimeArtifacts:
+        - sourcePath: "/opt/app-root/src/dist.tar.gz"
